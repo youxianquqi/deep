@@ -1,0 +1,8 @@
+﻿recording/
+recording2/
+*.mp4
+*.zip
+*.wav
+node_modules/
+Thumbs.db
+.DS_Store

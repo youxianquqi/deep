@@ -1,0 +1,30 @@
+{
+  "description": "A golden-hour glass hamster wheel on a wooden desk. Drag the small rheostat slider to change walking speed and the decorative light; the same balance can be set from Wallpaper Engine properties when mouse input is unavailable.",
+  "file": "index.html",
+  "general": {
+    "properties": {
+      "balance": {
+        "order": 0,
+        "text": "Balance (Speed & Light)",
+        "type": "slider",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "value": 0.5
+      },
+      "schemecolor": {
+        "order": 1,
+        "text": "ui_browse_properties_scheme_color",
+        "type": "color",
+        "value": "0.318 0.196 0.125"
+      }
+    }
+  },
+  "preview": "preview.jpg",
+  "tags": [
+    "Abstract"
+  ],
+  "title": "Golden Hour Glass Wheel",
+  "type": "web",
+  "version": 1
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>暖光玻璃仓鼠跑轮 · Golden Hour Glass Wheel</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    overflow: hidden; background: #0b080d;
+  }
+  body {
+    background:
+      radial-gradient(120% 90% at 38% 38%, #34211f 0%, #170f13 52%, #090609 100%);
+  }
+  #scene {
+    position: fixed; inset: 0;
+    width: 100vw; height: 100vh;
+    display: block;
+    opacity: 0;
+    transition: opacity 1.6s ease;
+    cursor: none;
+  }
+  body.ready #scene { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    #scene { transition: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="scene" aria-label="黄昏书桌上的透明玻璃仓鼠跑轮：有宽度的圆筒形玻璃跑道、开放前入口、半透毛玻璃后背板、后置轴承与香槟金支架，固定在木质底座上；固定的小时数字、一个移动的分钟光点；人物使用原始 11 帧走路动画在滚筒内原地行走，脚底接触跑道，滚筒随步速同步旋转，支架和钟面不动"></canvas>
+<script>
+/*__THREE__*/
+</script>
+<script>
+/*__APP__*/
+</script>
+<script>
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){ document.body.classList.add('ready'); });
+  });
+</script>
+</body>
+</html>
