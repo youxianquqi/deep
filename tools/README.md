@@ -29,3 +29,26 @@ ffmpeg -y -i assets/ambience.wav -codec:a libmp3lame -b:a 160k assets/ambience.m
 ```
 
 请从仓库根目录运行，脚本输出 `assets/ambience.wav`。
+
+## llm-image-tool.mjs
+
+N1N / llm-api.net 图像生成工具，供 Agent 通过 shell 调用。默认模型
+`gpt-image-2-all`，默认尺寸 `1024x1024`。
+
+```bash
+export N1N_API_KEY="..."
+node tools/llm-image-tool.mjs --prompt "..." --size 1536x1024 --n 1 --download
+```
+
+Agent 工具描述：
+
+- `tools/llm-image-tool.tool.json`
+- 详细中文文档：`docs/07-图像生成工具.md`
+
+本地 mock 测试：
+
+```bash
+node tools/test-llm-image-tool.mjs
+```
+
+注意：不要把 API Key 作为命令行参数传递。

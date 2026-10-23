@@ -1,0 +1,179 @@
+{
+  "name": "n1n_generate_image",
+  "version": "1.0.0",
+  "description": "Generate or edit images through the N1N llm-api.net OpenAI-compatible images endpoint. Use this when an agent needs to create image assets, combine reference images, or produce a visual from a text prompt.",
+  "invocation": {
+    "command": "node",
+    "args": [
+      "tools/llm-image-tool.mjs"
+    ],
+    "transport": "stdio",
+    "output": "stdout JSON"
+  },
+  "environment": {
+    "N1N_API_KEY": "required; secret; never place in arguments or logs",
+    "LLM_API_KEY": "fallback secret",
+    "N1N_API_BASE": "optional, default https://llm-api.net"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "anyOf": [
+      { "required": ["prompt"] },
+      { "required": ["prompt_file"] }
+    ],
+    "properties": {
+      "prompt": {
+        "type": "string",
+        "description": "Text description of the desired image. Required unless prompt_file is supplied."
+      },
+      "prompt_file": {
+        "type": "string",
+        "description": "Path to a UTF-8 prompt file."
+      },
+      "model": {
+        "type": "string",
+        "default": "gpt-image-2-all"
+      },
+      "size": {
+        "type": "string",
+        "enum": [
+          "1024x1024",
+          "1536x1024",
+          "1024x1536"
+        ],
+        "default": "1024x1024"
+      },
+      "n": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 4,
+        "default": 1
+      },
+      "image": {
+        "type": "array",
+        "maxItems": 5,
+        "items": {
+          "type": "string",
+          "format": "uri"
+        },
+        "description": "Reference image URLs. API documentation expects URLs."
+      },
+      "image_file": {
+        "type": "array",
+        "maxItems": 5,
+        "items": {
+          "type": "string"
+        },
+        "description": "Local reference images converted to data URLs; may be rejected by the remote API."
+      },
+      "download": {
+        "type": "boolean",
+        "default": false
+      },
+      "out_dir": {
+        "type": "string",
+        "default": "generated"
+      },
+      "timeout": {
+        "type": "integer",
+        "minimum": 10,
+        "maximum": 600,
+        "default": 180
+      },
+      "max_retries": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 3,
+        "default": 2
+      },
+      "dry_run": {
+        "type": "boolean",
+        "default": false,
+        "description": "Print a sanitized request without calling the API."
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "ok": {
+        "type": "boolean"
+      },
+      "model": {
+        "type": "string"
+      },
+      "size": {
+        "type": "string"
+      },
+      "n": {
+        "type": "integer"
+      },
+      "created": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "requestId": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "images": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "index": {
+              "type": "integer"
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "revised_prompt": {
+              "type": "string"
+            },
+            "saved": {
+              "type": "string"
+            },
+            "download_error": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "error_codes": [
+    "INVALID_ARGUMENT",
+    "MISSING_PROMPT",
+    "EMPTY_PROMPT",
+    "INVALID_SIZE",
+    "TOO_MANY_IMAGES",
+    "UNSUPPORTED_IMAGE",
+    "IMAGE_FILE_ERROR",
+    "MISSING_API_KEY",
+    "NETWORK_ERROR",
+    "API_ERROR",
+    "INVALID_RESPONSE",
+    "UNEXPECTED_ERROR"
+  ],
+  "example": {
+    "argv": [
+      "--prompt",
+      "一间黄昏书房里的玻璃仓鼠跑轮，暖光，电影感",
+      "--size",
+      "1536x1024",
+      "--n",
+      "1",
+      "--download",
+      "--out-dir",
+      "generated"
+    ]
+  }
+}

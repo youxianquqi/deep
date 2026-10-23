@@ -96,6 +96,23 @@ t = 1.0  → 1.2×，淡紫，45% 亮度
 - [Wallpaper Engine 壁纸工程](docs/04-WallpaperEngine.md)
 - [验证记录与已知限制](docs/05-验证记录.md)
 - [素材、音乐与来源说明](docs/06-素材与来源.md)
+- [N1N 图像生成工具（Agent）](docs/07-图像生成工具.md)
+
+## N1N 图像生成工具
+
+仓库内提供 Agent 可调用的 N1N 图像生成 CLI：
+
+```bash
+export N1N_API_KEY="..."
+node tools/llm-image-tool.mjs --prompt "..." --size 1536x1024 --download
+```
+
+- CLI：`tools/llm-image-tool.mjs`
+- 工具描述与 JSON Schema：`tools/llm-image-tool.tool.json`
+- 详细文档：`docs/07-图像生成工具.md`
+- 本地 mock 测试：`node tools/test-llm-image-tool.mjs`
+
+API Key 只从环境变量读取，不要写入命令参数或提交记录。
 
 ## 已知限制
 
